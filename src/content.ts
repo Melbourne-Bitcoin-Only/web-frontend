@@ -13,15 +13,15 @@ export const EVENTS = [
       description: 'Presented by @conzaa, an introduction to using Bisq exchange',
       date: '2023-02-02',
       time: '18:30',
-      location: 'North Fitzroy Library Seminar Room'
+      location: 'Bargoonga Nganjin Seminar Room 2, North Fitzroy Library'
     },
     {
       url: '',
       title: 'An evening with Texas Slim',
       description: 'Come and hear from Texas Slim, as he visits Australia to support the Australian Beef Initiative',
       date: '2023-02-16',
-      time: '18:30',
-      location: 'To be confirmed'
+      time: '18:00',
+      location: "Kathleen Syme - Meeting Room 3, 251 Faraday St, Carlton VIC 3053"
     }
   ]
 
@@ -115,6 +115,16 @@ export const RESOURCES = [
     title: "Bitcoin Only Store",
     description: "Streetwear for Sovereign Individuals",
     category: 'Retail',
+    isMelbourneOrigin: true,
+    isAustralianOrigin: true,
+    experienceLevelRequired: 'low'
+  },
+  {
+    medium: 'website',
+    url: 'https://www.airbnb.com.au/rooms/592050871156761438?guests=1&adults=1&s=67&unique_share_id=2c43c51d-56bc-4661-900e-05838825024c',
+    title: "Kirkness Sanctuary House",
+    description: "A nice getaway in Victoria, run by bitcoiner 'Muck' (username @Muck4BTC). Discounts for plebs.",
+    category: 'Accomodation',
     isMelbourneOrigin: true,
     isAustralianOrigin: true,
     experienceLevelRequired: 'low'

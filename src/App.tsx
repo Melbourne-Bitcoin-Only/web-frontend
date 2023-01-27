@@ -5,7 +5,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { useTheme } from '@mui/material/styles';
-import { Container, Tabs, Tab, Typography, Box, Button, Card, CardActions, CardContent, Grid, Chip, Stack } from '@mui/material';
+import { Container, Tabs, Tab, Typography, Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Chip, Stack } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { EVENTS, INTERNET_SOCIALS, RESOURCES } from './content';
 import { compareAsc, format } from 'date-fns'
@@ -48,6 +48,7 @@ function a11yProps(index: number) {
 const App = () => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  const [category, setCategory] = React.useState('all');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -55,6 +56,12 @@ const App = () => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
   const today = new Date()
+  const categorySet: Set<string> = new Set()
+  categorySet.add('Show All')
+  RESOURCES.forEach(({category}) => {
+    categorySet.add(category)
+  })
+  const categories = Array.from(categorySet)
 
   return (
     <Box sx={{ bgcolor: 'background.paper', minHeight: '100vh' }}>
@@ -95,17 +102,21 @@ const App = () => {
                   </Typography>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                  {INTERNET_SOCIALS.map(social => (
-                      <div style={{paddingTop: 10, paddingBottom: 15}}>
-                      <Typography variant="h5" sx={{paddingBottom: 2}}>
-                        {social.type}
-                      </Typography>
-                      <Button href={social.url} target="_blank" variant="contained" startIcon={<OpenInNewIcon />}>
-                      {social.url}
-                      </Button>
-                      </div>
-                  ))
-                  }
+                  <Grid container spacing={2}>
+                    {INTERNET_SOCIALS.map(social => (
+                        <Grid item xs={6} style={{paddingTop: 10, paddingBottom: 15}}>
+                        <Typography variant="h5" sx={{paddingBottom: 2}}>
+                          {social.type}
+                        </Typography>
+                        <Button href={social.url} sx={{textTransform: 'lowercase'}}target="_blank" variant="outlined" startIcon={<OpenInNewIcon />}>
+                          <Typography variant="body2">
+                            {social.url}
+                          </Typography>
+                        </Button>
+                        </Grid>
+                    ))
+                    }
+                  </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   <Typography variant="h4">
@@ -158,15 +169,39 @@ const App = () => {
                         {event.description}
                         </Typography>
                         <Typography variant="body1">
-                        Time: {event.time}
+                        <b>Time:</b> {event.time}
+                        </Typography>
+                        <Typography variant="body1">
+                        <b>Location:</b> {event.location}
                         </Typography>
                       </div>
                     )
                   })}
                 </TabPanel>
                 <TabPanel value={value} index={3} dir={theme.direction}>
+                  <Container maxWidth="lg" sx={{textAlign: 'center', marginBottom: 5}}>
+                    <ButtonGroup size="small" variant="outlined">
+                      {categories.map(category => {
+                        return (
+                          <Button onClick={() => {
+                            if(category === 'Show All') {
+                              setCategory('all')
+                            }
+                            setCategory(category)
+                          }}>
+                            {category}
+                          </Button>
+                        )
+                      })}
+                    </ButtonGroup>
+                  </Container>
                   <Grid container spacing={2}>
-                    {RESOURCES.map(resource => {
+                    {RESOURCES.filter(resource => {
+                      if(category === 'Show All') {
+                        return true
+                      }
+                      return resource.category === category
+                    }).map(resource => {
                       const {medium, url, title, description, category, isMelbourneOrigin, isAustralianOrigin, experienceLevelRequired} = resource;
                       return (
                         <Grid item xs={12} md={6}>
