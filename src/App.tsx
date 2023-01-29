@@ -48,7 +48,7 @@ function a11yProps(index: number) {
 const App = () => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
-  const [category, setCategory] = React.useState('all');
+  const [category, setCategory] = React.useState('Show All');
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -184,9 +184,6 @@ const App = () => {
                       {categories.map(category => {
                         return (
                           <Button onClick={() => {
-                            if(category === 'Show All') {
-                              setCategory('all')
-                            }
                             setCategory(category)
                           }}>
                             {category}
