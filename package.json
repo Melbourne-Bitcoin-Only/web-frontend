@@ -10,7 +10,7 @@
     "javascript"
   ],
   "version": "0.2.0",
-  "homepage": "https://Melbourne-Bitcoin-Only.github.io/web-frontend",
+  "homepage": "https://www.bitcoinonly.melbourne",
   "license": "Apache-2.0",
   "dependencies": {
     "@emotion/react": "^11.10.5",
