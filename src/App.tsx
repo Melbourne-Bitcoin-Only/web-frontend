@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { useTheme } from '@mui/material/styles';
-import { Container, Tabs, Tab, Typography, Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Chip, Stack } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Container, Tabs, Tab, Typography, Box, Button, ButtonGroup, Card, CardActions, CardContent, Grid, Chip, Stack, Switch } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { EVENTS, INTERNET_SOCIALS, RESOURCES } from './content';
 import { compareAsc, format } from 'date-fns'
 import { useMediaQuery } from 'react-responsive'
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,8 +46,22 @@ function a11yProps(index: number) {
   };
 }
 
+
 const App = () => {
-  const theme = useTheme();
+
+  const [toggleDark, settoggleDark] = useState(false);
+  const myTheme=createTheme({
+
+      // Theme settings
+      palette:{
+        mode: toggleDark ? 'light' : 'dark',
+      }
+  });
+
+  const handleModeChange = () => {
+    settoggleDark(!toggleDark)
+};
+
   const [value, setValue] = React.useState(0);
   const [category, setCategory] = React.useState('Show All');
 
@@ -64,19 +79,26 @@ const App = () => {
   const categories = Array.from(categorySet)
 
   return (
+    <ThemeProvider theme={myTheme}>
+
     <Box sx={{ bgcolor: 'background.paper', minHeight: '100vh' }}>
       <Container maxWidth={isMobile ? false : 'md'}>
-          <Typography variant={isMobile ? 'h4' : 'h3'} align="center" sx={{p: 3}}>
+          <Typography color="textPrimary" variant={isMobile ? 'h4' : 'h3'} align="center" sx={{p: 3}}>
             Melbourne Bitcoin Only
           </Typography>
-          <Typography variant="body1" align="center" sx={{paddingBottom: 5}}>
+          <Switch
+              checked={toggleDark}
+              onChange={handleModeChange}
+              name="toggleDark"
+              color="default"
+          />
+          <Typography color="textPrimary" variant="body1" align="center" sx={{paddingBottom: 5}}>
             A friendly bitcoin community in Melbourne, Australia
           </Typography>
           <Container maxWidth={isMobile ? false : 'md'} disableGutters={isTabletOrMobile}>
                 <Tabs
                   value={value}
                   onChange={handleChange}
-                  indicatorColor="primary"
                   textColor="primary"
                   variant={isMobile? 'scrollable' : 'fullWidth'}
                   aria-label="full width tabs"
@@ -88,20 +110,20 @@ const App = () => {
                   <Tab label="Meetups" {...a11yProps(2)} />
                   <Tab label="Information Resources" {...a11yProps(3)} />
                 </Tabs>
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                  <Typography variant="body1" align="center" sx={{p: 3}}>
+                <TabPanel value={value} index={0}>
+                  <Typography color="textPrimary" variant="body1" align="center" sx={{p: 3}}>
                     Approximately 7 years ago, a company was started in Melbourne dedicated to Bitcoin education. However, soon the name changed to Blockchain Australia and it was no longer bitcoin focused, but blockchain focussed (the old adage 'Blockchain, not Bitcoin' was in vogue).
                     
                   </Typography>
-                  <Typography variant="body1" align="center" sx={{p: 3}}>
+                  <Typography color="textPrimary" variant="body1" align="center" sx={{p: 3}}>
                   A group of rogue bitcoiners met up with Stephan Livera one night in [insert season, year] and it was decided that a bitcoin only focussed group would be spawned in Melbourne.
                   </Typography>
-                  <Typography variant="body1" align="center" sx={{p: 3}}>
+                  <Typography color="textPrimary" variant="body1" align="center" sx={{p: 3}}>
                     Many shitcoins and a scandemic later, the bitcoin only group operates in a fairly decentralised manner but meeting up regularly (as of Summer 2022-2023).
                     While the group welcomes anyone from any background (and no discrimination for past shitcoinery), there is one main rule: bitcoin is the focus, not shitcoins.
                   </Typography>
                 </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
+                <TabPanel value={value} index={1}>
                   <Grid container spacing={2}>
                     {INTERNET_SOCIALS.map(social => (
                         <Grid item xs={6} style={{paddingTop: 10, paddingBottom: 15}}>
@@ -118,8 +140,8 @@ const App = () => {
                     }
                   </Grid>
                 </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                  <Typography variant="h4">
+                <TabPanel value={value} index={2}>
+                  <Typography color="textPrimary" variant="h4">
                     Upcoming
                   </Typography>
                   {EVENTS.filter(event => {
@@ -130,25 +152,25 @@ const App = () => {
                     const prettyEventDate = format(new Date(event.date), 'dd/MM/yyyy')
                     return (
                       <div style={{paddingBottom: 20, paddingTop: 20}}>
-                        <Typography variant="body2">
+                        <Typography color="textPrimary" variant="body2">
                           {prettyEventDate}
                         </Typography>
-                        <Typography variant="h5">
+                        <Typography color="textPrimary" variant="h5">
                           {event.title}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         {event.description}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         <b>Time:</b> {event.time}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         <b>Location:</b> {event.location}
                         </Typography>
                       </div>
                     )
                   })}
-                  <Typography variant="h4" sx={{marginTop: 5}}>
+                  <Typography color="textPrimary" variant="h4" sx={{marginTop: 5}}>
                     Past
                   </Typography>
                   {EVENTS.filter(event => {
@@ -159,26 +181,26 @@ const App = () => {
                     const prettyEventDate = format(new Date(event.date), 'dd/MM/yyyy')
                     return (
                       <div style={{paddingBottom: 20, paddingTop: 20}}>
-                        <Typography variant="body2">
+                        <Typography color="textPrimary" variant="body2">
                           {prettyEventDate}
                         </Typography>
-                        <Typography variant="h5">
+                        <Typography color="textPrimary" variant="h5">
                           {event.title}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         {event.description}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         <b>Time:</b> {event.time}
                         </Typography>
-                        <Typography variant="body1">
+                        <Typography color="textPrimary" variant="body1">
                         <b>Location:</b> {event.location}
                         </Typography>
                       </div>
                     )
                   })}
                 </TabPanel>
-                <TabPanel value={value} index={3} dir={theme.direction}>
+                <TabPanel value={value} index={3} >
                   <Container maxWidth="lg" sx={{textAlign: 'center', marginBottom: 5}}>
                     <ButtonGroup size="small" variant="outlined">
                       {categories.map(category => {
@@ -216,10 +238,10 @@ const App = () => {
                               <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
                               <b>Resource type:</b> {medium} | <b>Category:</b> {category} | <b>Experience required:</b> {experienceLevelRequired}
                               </Typography>
-                              <Typography variant="h5" sx={{mb: 1.5}} component="div">
+                              <Typography color="textPrimary" variant="h5" sx={{mb: 1.5}} component="div">
                               {title}
                               </Typography>
-                              <Typography variant="body1">
+                              <Typography color="textPrimary" variant="body1">
                                 {description}
                               </Typography>
                             </CardContent>
@@ -236,6 +258,7 @@ const App = () => {
 
       </Container>
     </Box>
+    </ThemeProvider>
   );
 }
 
