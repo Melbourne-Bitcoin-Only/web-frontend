@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 
 .App {
   text-align: center;
@@ -7,4 +13,9 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.resources {
+  height: 200px;
+  width: 200px;
 }
