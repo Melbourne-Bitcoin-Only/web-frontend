@@ -4,7 +4,6 @@
   padding: 0;
 }
 
-
 .App {
   text-align: center;
   height: 100vh;
@@ -13,9 +12,4 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-.resources {
-  height: 200px;
-  width: 200px;
 }
