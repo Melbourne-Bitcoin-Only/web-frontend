@@ -31,6 +31,10 @@ export const INTERNET_SOCIALS = [
         url: 'https://t.me/btcmelbourne'
     },
     {
+      type: 'Telegram (Melbourne Bitcoin Developers)',
+      url: 'https://t.me/+6B_js_rFZ0syY2E1'
+    },
+    {
         type: 'Twitter',
         url: 'https://twitter.com/BitcoinMEL'
     },
@@ -39,12 +43,12 @@ export const INTERNET_SOCIALS = [
         url: 'https://github.com/Melbourne-Bitcoin-Only'
     },
     {
-        type: 'Meetup.com',
-        url: 'https://meetup.com/Melbourne-Bitcoin-Only/'
+      type: 'Github (Melbourne Bitcoin Developers)',
+      url: 'https://github.com/MelbourneBitDevs/MelbBitDevs'
     },
     {
-        type: 'Website',
-        url: 'https://melbourne-bitcoin-only.github.io/'
+        type: 'Meetup.com',
+        url: 'https://meetup.com/Melbourne-Bitcoin-Only/'
     }
 ]
 
