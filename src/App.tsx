@@ -127,7 +127,7 @@ const App = () => {
                   <Grid container spacing={2}>
                     {INTERNET_SOCIALS.map(social => (
                         <Grid item xs={6} style={{paddingTop: 10, paddingBottom: 15}}>
-                        <Typography variant="h5" color="textPrimary" sx={{paddingBottom: 2}}>
+                        <Typography variant="h6" color="textPrimary" sx={{paddingBottom: 2}}>
                           {social.type}
                         </Typography>
                         <Button href={social.url} sx={{textTransform: 'lowercase'}}target="_blank" variant="outlined" startIcon={<OpenInNewIcon />}>
