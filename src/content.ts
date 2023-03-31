@@ -75,6 +75,16 @@ export const RESOURCES = [
   },
   {
     medium: 'website',
+    url: 'https://bitcoinforlocalbusiness.com/',
+    title: 'Bitcoin for Local Business',
+    description: 'The bottom-up approach to a bitcoinized world',
+    category: 'education',
+    isMelbourneOrigin: false,
+    isAustralianOrigin: false,
+    experienceLevelRequired: 'low'
+  },
+  {
+    medium: 'website',
     url: 'https://bitcoinbushbash.info/',
     title: 'Bitcoin Bush Bash',
     description: 'Website for the informal Aussie Bush Bash, occurring in three states so far.',
@@ -112,6 +122,16 @@ export const RESOURCES = [
     isMelbourneOrigin: true,
     isAustralianOrigin: true,
     experienceLevelRequired: 'medium'
+  },
+  {
+    medium: 'book',
+    url: 'https://bitcoinbook.ai/',
+    title: "AI generated Bitcoin books",
+    description: "Engineered and curated by the Bitcoin community",
+    category: 'Education',
+    isMelbourneOrigin: true,
+    isAustralianOrigin: true,
+    experienceLevelRequired: 'low'
   },
   {
     medium: 'website',
